@@ -38,5 +38,5 @@ else
 WebApplication app = builder.Build();
 app.UseSignIn();
 app.UseStaticFiles(new StaticFileOptions { OnPrepareResponse = context => context.Context.Response.Headers.CacheControl = "no-cache" });
-app.MapPages().MapApi();
+app.MapPages().MapApi().MapHealth();
 app.Run();
