@@ -21,7 +21,10 @@
         <button data-endpoint="/api/volume/mute" aria-label="Mute">Mute</button>
         <button data-endpoint="/api/volume/up" data-repeat aria-label="Volume up">Vol +</button>
     </div>
-    <button class="home" data-endpoint="/api/home">Home</button>
+    <div class="pair">
+        <button data-endpoint="/api/key/back" aria-label="Back">Back</button>
+        <button data-endpoint="/api/home" aria-label="Home">Home</button>
+    </div>
     <script>
         var statusElement = document.getElementById("status");
         var statusText = document.getElementById("statusText");

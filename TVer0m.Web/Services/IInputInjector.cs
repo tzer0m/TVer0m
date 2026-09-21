@@ -9,7 +9,7 @@ public interface IInputInjector
     /// Checks whether a key name is on the whitelist.
     /// </summary>
     /// <param name="name">The key name from the request.</param>
-    /// <returns>True if the name is one of up, down, left, right or ok.</returns>
+    /// <returns>True if the name is one of up, down, left, right, ok or back.</returns>
     bool IsValidKey(string name);
 
     /// <summary>

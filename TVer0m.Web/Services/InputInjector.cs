@@ -9,7 +9,7 @@ public class InputInjector(IProcessRunner runner) : IInputInjector
     /// <summary>
     /// Maps the accepted key names to xdotool key names.
     /// </summary>
-    private static readonly Dictionary<string, string> KeyMap = new(StringComparer.Ordinal) { ["up"] = "Up", ["down"] = "Down", ["left"] = "Left", ["right"] = "Right", ["ok"] = "Return" };
+    private static readonly Dictionary<string, string> KeyMap = new(StringComparer.Ordinal) { ["up"] = "Up", ["down"] = "Down", ["left"] = "Left", ["right"] = "Right", ["ok"] = "Return", ["back"] = "Escape" };
 
     /// <summary>
     /// Builds the xdotool arguments for a key name.
@@ -29,7 +29,7 @@ public class InputInjector(IProcessRunner runner) : IInputInjector
     /// Checks whether a key name is on the whitelist.
     /// </summary>
     /// <param name="name">The key name from the request.</param>
-    /// <returns>True if the name is one of up, down, left, right or ok.</returns>
+    /// <returns>True if the name is one of up, down, left, right, ok or back.</returns>
     public bool IsValidKey(string name)
     {
         return KeyMap.ContainsKey(name);
