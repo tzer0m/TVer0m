@@ -86,6 +86,7 @@ public static class SignInExtensions
         options.ClientSecret = oidc.ClientSecret;
         options.ResponseType = "code";
         options.UsePkce = true;
+        options.PushedAuthorizationBehavior = PushedAuthorizationBehavior.Disable;
         options.GetClaimsFromUserInfoEndpoint = true;
         options.Scope.Clear();
         options.Scope.Add("openid");
