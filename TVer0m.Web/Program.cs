@@ -36,7 +36,7 @@ else
 
 // Serve the static pages without caching so updates show straight away, then map the routes.
 WebApplication app = builder.Build();
-app.UseSignIn();
 app.UseStaticFiles(new StaticFileOptions { OnPrepareResponse = context => context.Context.Response.Headers.CacheControl = "no-cache" });
+app.UseSignIn();
 app.MapPages().MapApi().MapHealth();
 app.Run();
