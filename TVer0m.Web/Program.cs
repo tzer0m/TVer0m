@@ -1,3 +1,4 @@
+using TVer0m.Web.Authentication;
 using TVer0m.Web.Detection;
 using TVer0m.Web.Endpoints;
 using TVer0m.Web.Mocks;
@@ -13,6 +14,9 @@ if (string.IsNullOrEmpty(builder.Configuration["urls"]))
 {
     builder.WebHost.UseUrls("http://0.0.0.0:8090");
 }
+
+// Sign in with Pocket ID when enabled in configuration.
+builder.AddSignIn();
 
 // Real implementations on Linux, logging mocks elsewhere.
 builder.Services.AddSingleton<DeviceDetector>();
@@ -32,6 +36,7 @@ else
 
 // Serve the static pages without caching so updates show straight away, then map the routes.
 WebApplication app = builder.Build();
+app.UseSignIn();
 app.UseStaticFiles(new StaticFileOptions { OnPrepareResponse = context => context.Context.Response.Headers.CacheControl = "no-cache" });
 app.MapPages().MapApi();
 app.Run();
