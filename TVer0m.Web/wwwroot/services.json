@@ -3,5 +3,10 @@
     "name": "YouTube",
     "url": "https://www.youtube.com/tv",
     "colour": "#ff0000"
+  },
+  {
+    "name": "Jellyfin",
+    "url": "https://jf.tzer0m.co.uk",
+    "colour": "#000b25"
   }
 ]
