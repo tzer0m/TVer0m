@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TVer0m</title>
+    <link rel="stylesheet" href="/css/interstitial.css">
+</head>
+<body>
+    <noscript><a href="/host">Host</a><a href="/remote">Remote</a></noscript>
+    <script>
+        // A touch-first screen under 900px is a phone or tablet, including iPadOS pretending to be a Mac.
+        var coarse = window.matchMedia("(pointer: coarse)").matches;
+        var narrow = Math.min(window.screen.width, window.screen.height) < 900;
+        window.location.replace(coarse && narrow ? "/remote" : "/host");
+    </script>
+</body>
+</html>

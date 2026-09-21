@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.StaticFiles;
 using TVer0m.Web.Detection;
 using TVer0m.Web.Endpoints;
 using TVer0m.Web.Mocks;
@@ -33,6 +32,6 @@ else
 
 // Serve the static pages without caching so updates show straight away, then map the routes.
 WebApplication app = builder.Build();
-app.UseStaticFiles(new StaticFileOptions { OnPrepareResponse = (StaticFileResponseContext context) => context.Context.Response.Headers.CacheControl = "no-cache" });
+app.UseStaticFiles(new StaticFileOptions { OnPrepareResponse = context => context.Context.Response.Headers.CacheControl = "no-cache" });
 app.MapPages().MapApi();
 app.Run();

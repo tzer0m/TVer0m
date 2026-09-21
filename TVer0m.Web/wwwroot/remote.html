@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0b0f">
+    <title>TVer0m Remote</title>
+    <link rel="stylesheet" href="/css/remote.css">
+</head>
+<body>
+    <div id="status"><span id="dot"></span><span id="statusText">Connecting</span></div>
+    <div class="pad">
+        <button class="up" data-endpoint="/api/key/up" data-repeat aria-label="Up">&#9650;</button>
+        <button class="left" data-endpoint="/api/key/left" data-repeat aria-label="Left">&#9664;</button>
+        <button class="ok" data-endpoint="/api/key/ok">OK</button>
+        <button class="right" data-endpoint="/api/key/right" data-repeat aria-label="Right">&#9654;</button>
+        <button class="down" data-endpoint="/api/key/down" data-repeat aria-label="Down">&#9660;</button>
+    </div>
+    <div class="row">
+        <button data-endpoint="/api/volume/down" data-repeat aria-label="Volume down">Vol &minus;</button>
+        <button data-endpoint="/api/volume/mute" aria-label="Mute">Mute</button>
+        <button data-endpoint="/api/volume/up" data-repeat aria-label="Volume up">Vol +</button>
+    </div>
+    <button class="home" data-endpoint="/api/home">Home</button>
+    <script>
+        var statusElement = document.getElementById("status");
+        var statusText = document.getElementById("statusText");
+        var repeatDelay = 400;
+        var repeatInterval = 120;
+
+        function setConnected(connected) {
+            statusElement.classList.toggle("connected", connected);
+            statusText.textContent = connected ? "Connected" : "Disconnected";
+        }
+
+        // Sends the command and updates the indicator; a 500 still means the server is reachable.
+        function send(button) {
+            fetch(button.dataset.endpoint, { method: "POST" })
+                .then(function (response) {
+                    setConnected(true);
+                    if (!response.ok) {
+                        button.classList.add("failed");
+                        setTimeout(function () { button.classList.remove("failed"); }, 300);
+                    }
+                })
+                .catch(function () { setConnected(false); });
+        }
+
+        document.querySelectorAll("button[data-endpoint]").forEach(function (button) {
+            var delayTimer = null;
+            var repeatTimer = null;
+
+            function stop() {
+                clearTimeout(delayTimer);
+                clearInterval(repeatTimer);
+                button.classList.remove("held");
+            }
+
+            button.addEventListener("pointerdown", function (event) {
+                event.preventDefault();
+                button.setPointerCapture(event.pointerId);
+                button.classList.add("held");
+                if (navigator.vibrate) { navigator.vibrate(15); }
+                send(button);
+                if (button.hasAttribute("data-repeat")) {
+                    delayTimer = setTimeout(function () {
+                        repeatTimer = setInterval(function () { send(button); }, repeatInterval);
+                    }, repeatDelay);
+                }
+            });
+            button.addEventListener("pointerup", stop);
+            button.addEventListener("pointercancel", stop);
+            button.addEventListener("lostpointercapture", stop);
+            button.addEventListener("contextmenu", function (event) { event.preventDefault(); });
+        });
+
+        function checkConnection() {
+            fetch("/services.json", { method: "HEAD", cache: "no-store" })
+                .then(function (response) { setConnected(response.ok); })
+                .catch(function () { setConnected(false); });
+        }
+
+        window.addEventListener("online", checkConnection);
+        window.addEventListener("offline", function () { setConnected(false); });
+        document.addEventListener("visibilitychange", function () { if (!document.hidden) { checkConnection(); } });
+        checkConnection();
+        setInterval(checkConnection, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+    cursor: none;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #0b0b0f;
+    color: #f2f2f7;
+    font-family: system-ui, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    padding: 4vh 5vw;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 2rem;
+}
+
+#date {
+    font-size: 2.5rem;
+    color: #9a9aa8;
+}
+
+#clock {
+    font-size: 5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 3rem;
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding: 2rem;
+}
+
+    main::-webkit-scrollbar {
+        display: none;
+    }
+
+.tile {
+    width: 26rem;
+    height: 16rem;
+    border: 0;
+    border-radius: 1.5rem;
+    color: #fff;
+    font: inherit;
+    font-size: 4rem;
+    font-weight: 700;
+    background: #333;
+    opacity: 0.85;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    outline: none;
+}
+
+    .tile:focus {
+        opacity: 1;
+        transform: scale(1.1);
+        box-shadow: 0 0 0 0.5rem #fff, 0 0 4rem rgba(255, 255, 255, 0.35);
+    }
+
+#message {
+    font-size: 2.5rem;
+    color: #9a9aa8;
+}
