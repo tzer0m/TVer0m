@@ -29,7 +29,14 @@
         function addTile(service) {
             var tile = document.createElement("button");
             tile.className = "tile";
-            tile.textContent = service.name;
+            if (service.logo) {
+                var logo = document.createElement("img");
+                logo.src = service.logo;
+                logo.alt = service.name;
+                tile.appendChild(logo);
+            } else {
+                tile.textContent = service.name;
+            }
             tile.style.background = service.colour;
             tile.addEventListener("click", function () { window.location.href = service.url; });
             tilesElement.appendChild(tile);

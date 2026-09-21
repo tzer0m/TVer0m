@@ -2,11 +2,13 @@
   {
     "name": "YouTube",
     "url": "https://www.youtube.com/tv",
-    "colour": "#ff0000"
+    "logo": "/services/youtube.svg",
+    "colour": "#0f0f0f"
   },
   {
     "name": "Jellyfin",
     "url": "https://jf.tzer0m.co.uk",
+    "logo": "/services/jellyfin.svg",
     "colour": "#000b25"
   }
 ]
