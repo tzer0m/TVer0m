@@ -109,9 +109,12 @@ button {
     grid-row: 3;
 }
 
-.pair {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+.pad .back {
+    grid-column: 3;
+    grid-row: 3;
+    font-size: 1.4rem;
+}
+
+.home {
     width: min(90vw, 24rem);
 }

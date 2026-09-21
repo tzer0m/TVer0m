@@ -15,16 +15,14 @@
         <button class="ok" data-endpoint="/api/key/ok">OK</button>
         <button class="right" data-endpoint="/api/key/right" data-repeat aria-label="Right">&#9654;</button>
         <button class="down" data-endpoint="/api/key/down" data-repeat aria-label="Down">&#9660;</button>
+        <button class="back" data-endpoint="/api/key/back" aria-label="Back">Back</button>
     </div>
     <div class="row">
         <button data-endpoint="/api/volume/down" data-repeat aria-label="Volume down">Vol &minus;</button>
         <button data-endpoint="/api/volume/mute" aria-label="Mute">Mute</button>
         <button data-endpoint="/api/volume/up" data-repeat aria-label="Volume up">Vol +</button>
     </div>
-    <div class="pair">
-        <button data-endpoint="/api/key/back" aria-label="Back">Back</button>
-        <button data-endpoint="/api/home" aria-label="Home">Home</button>
-    </div>
+    <button class="home" data-endpoint="/api/home">Home</button>
     <script>
         var statusElement = document.getElementById("status");
         var statusText = document.getElementById("statusText");
