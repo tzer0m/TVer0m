@@ -1,0 +1,22 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: [self-hosted, tzer0m]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Publish
+        run: dotnet publish TVer0m.Web/TVer0m.Web.csproj -c Release -r linux-x64 --self-contained -p:PublishSingleFile=true -o ${{ runner.temp }}/TVer0m
+      - name: Stop service
+        run: ssh jorah 'sudo systemctl stop TVer0m.service'
+      - name: Copy build
+        run: rsync -az --delete ${{ runner.temp }}/TVer0m/ jorah:/home/tzer0m/Services/TVer0m/
+      - name: Start service
+        run: ssh jorah 'sudo systemctl start TVer0m.service'
+      - name: Check status
+        run: ssh jorah 'sudo systemctl status TVer0m.service --no-pager'
