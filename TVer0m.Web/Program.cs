@@ -25,12 +25,14 @@ if (OperatingSystem.IsLinux())
     builder.Services.AddSingleton<IProcessRunner, ProcessRunner>();
     builder.Services.AddSingleton<IInputInjector, InputInjector>();
     builder.Services.AddSingleton<IVolumeController, VolumeController>();
+    builder.Services.AddSingleton<IScreenController, ScreenController>();
     builder.Services.AddHttpClient<IBrowserController, BrowserController>();
 }
 else
 {
     builder.Services.AddSingleton<IInputInjector, MockInputInjector>();
     builder.Services.AddSingleton<IVolumeController, MockVolumeController>();
+    builder.Services.AddSingleton<IScreenController, MockScreenController>();
     builder.Services.AddSingleton<IBrowserController, MockBrowserController>();
 }
 

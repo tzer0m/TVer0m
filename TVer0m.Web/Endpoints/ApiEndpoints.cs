@@ -31,6 +31,7 @@ public static class ApiEndpoints
             return ToResult(await volume.ApplyAsync(action));
         });
         app.MapPost("/api/home", async Task<IResult> (IBrowserController browser) => ToResult(await browser.HomeAsync()));
+        app.MapPost("/api/power", async Task<IResult> (IScreenController screen) => ToResult(await screen.ToggleAsync()));
         return app;
     }
 
