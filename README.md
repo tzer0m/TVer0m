@@ -8,7 +8,7 @@ A small ASP.NET Core (.NET 10) minimal API that turns an old iMac running Linux 
 
 - `/` sends each visitor to the right page. Phones and tablets go to `/remote`, and the kiosk browser (a user agent containing `SMART-TV` or `Tizen`) goes to `/host`. Anything else gets a tiny page that checks for a touch screen under 900px and redirects. `?mode=host` or `?mode=remote` overrides detection.
 - `/host` is the TV launcher: dark, large text, a clock, and one tile per entry in `wwwroot/services.json`. Arrow keys move focus, and Enter or a click opens the service.
-- `/remote` is the phone remote: a d-pad with OK and Back, volume down, mute and up, and Home. Arrows and volume repeat while held.
+- `/remote` is the phone remote: a d-pad with OK and Back, volume down, mute and up, Home and a screen power toggle. Arrows and volume repeat while held.
 
 Add a service by adding an entry with a `name`, `url` and `colour` to `wwwroot/services.json`. No code change is needed.
 
@@ -21,6 +21,7 @@ All endpoints are `POST` and return JSON in the form `{ "success": true, "messag
 | `/api/key/{name}` | `up`, `down`, `left`, `right`, `ok`, `back` | `xdotool key` with Up, Down, Left, Right, Return or Escape |
 | `/api/volume/{action}` | `up`, `down`, `mute` | `pactl` on the default sink, in 5% steps and never above 100% |
 | `/api/home` | none | Sends the browser back to `/host` |
+| `/api/power` | none | `xset dpms force` toggles the display on or off |
 
 Home uses Chromium's DevTools port (`Page.navigate` on `127.0.0.1:9222`) and falls back to typing the URL with xdotool. Chromium must be started with `--remote-debugging-port=9222` for the first method to work.
 
@@ -37,7 +38,7 @@ External programs are started with `ProcessStartInfo` and `ArgumentList`, with n
 
 Off Linux, mock implementations log the commands instead of running them, so both pages can be viewed on a Windows or Mac machine. Run the `TVer0m.Web` project and open `http://localhost:8090/host` and `http://localhost:8090/remote`.
 
-The app listens on `0.0.0.0:8090` unless another URL is supplied. There is no authentication, so keep it on a trusted LAN.
+The app listens on `0.0.0.0:8090` unless another URL is supplied. Sign in is only enforced for non-local requests, so local runs need no `Oidc` configuration.
 
 ## Project Layout
 
@@ -49,4 +50,5 @@ The app listens on `0.0.0.0:8090` unless another URL is supplied. There is no au
 
 ## Credits
 
-Icon: [Apple tv icons created by Darius Dan - Flaticon](https://www.flaticon.com/free-icons/apple-tv)
+- Icon: [Apple tv icons created by Darius Dan - Flaticon](https://www.flaticon.com/free-icons/apple-tv)
+- Jellyfin logo: [Jellyfin Project](https://jellyfin.org), CC BY-SA 4.0
