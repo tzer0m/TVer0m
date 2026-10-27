@@ -1,6 +1,6 @@
 # TVer0m
 
-[![Deploy](https://github.com/tzer0m/TVer0m/actions/workflows/deploy.yml/badge.svg)](https://github.com/tzer0m/TVer0m/actions/workflows/deploy.yml)
+[![Deploy](https://github.com/tzer0m/TVer0m/actions/workflows/deploy.yml/badge.svg)](https://github.com/tzer0m/TVer0m/actions/workflows/deploy.yml) [![Dependabot](https://github.com/tzer0m/TVer0m/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/tzer0m/TVer0m/actions/workflows/dependabot/dependabot-updates)
 
 A small ASP.NET Core (.NET 10) minimal API that turns an old iMac running Linux Mint (XFCE, X11) into a TV box. It serves a full-screen launcher for the iMac and a touch remote for a phone.
 
